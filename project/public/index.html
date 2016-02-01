@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Elimu</title>
+<style type="text/css" media="screen">
+html, body {
+	background-color: #487399;
+	font-family: "Lucida Grande","Verdana";
+	font-size: 14px;
+}
+
+a {color: #0000FF}
+
+#container {
+	width: 75%;
+	margin: 0 auto;
+	background-color: #FFF
+	padding: 20px 40px;
+	border: solid 1px black;
+	margin-top: 20px;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+$(function(){
+function addName(name){
+$('#names').append('<li>' + names.name + '</ul>');
+}
+
+$('#new_name').submit(function(e){
+$.post('/names', $(this).serialize(), addName);
+this.reset();
+e.preventDefault();
+});
+
+$.getJSON('/names', function(names){
+
+	$.each(names, function() {addName(this);});
+});
+});
+</script>
+</head>
+
+<body>
+<div id="container">
+<h1>Users</h1>
+<form id="Users">
+<input type="text" name="name[name]" id="name">
+<input type="submit" value="Add">
+</form>
+<ul id="names"></ul>
+</div>
+</body>
+
+</html>
